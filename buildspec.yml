@@ -49,8 +49,8 @@ phases:
       - echo $MEMORY
       - echo $REQUIRES_COMPATIBILITIES
       - echo $NETWORK_MODE
-      - DATA_JSON={"family": "'${SERVICE_NAME}'", "taskRoleArn": "'${TASKDEF_ROLE_ARN}'", "executionRoleArn": "'${EXECUTION_ROLE_ARN}'", "containerDefinitions": "'$TASKDEF'", "cpu": "'$CPU'", "memory": "'$MEMORY'", "requiresCompatibilities": ['$REQUIRES_COMPATIBILITIES'], "networkMode": "'${NETWORK_MODE}'" }
-      - echo "$DATA_JSON" > taskdef.json
+      - #DATA_JSON={"family": "'${SERVICE_NAME}'", "taskRoleArn": "'${TASKDEF_ROLE_ARN}'", "executionRoleArn": "'${EXECUTION_ROLE_ARN}'", "containerDefinitions": "'$TASKDEF'", "cpu": "'$CPU'", "memory": "'$MEMORY'", "requiresCompatibilities": ['$REQUIRES_COMPATIBILITIES'], "networkMode": "'${NETWORK_MODE}'" }
+      - #echo "$DATA_JSON" > taskdef.json
 artifacts:
   files:
     - 'appspec.yaml'
