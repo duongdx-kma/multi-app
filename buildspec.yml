@@ -41,7 +41,15 @@ phases:
       - MEMORY=$(echo $CURRENT_TASKDEF |jq -r '.taskDefinition.memory')
       - NETWORK_MODE=$(echo $CURRENT_TASKDEF |jq -r '.taskDefinition.networkMode')
       - REQUIRES_COMPATIBILITIES=$(echo $CURRENT_TASKDEF |jq '.taskDefinition.requiresCompatibilities[]' | tr '\n' ',' | sed 's/.$//')
-      - echo '{"family": "'${SERVICE_NAME}'", "taskRoleArn": "'${TASKDEF_ROLE_ARN}'", "executionRoleArn": "'${EXECUTION_ROLE_ARN}'", "containerDefinitions": '$TASKDEF', "cpu": "'$CPU'", "memory": "'$MEMORY'", "requiresCompatibilities": [ '$REQUIRES_COMPATIBILITIES' ], "networkMode": "'${NETWORK_MODE}'" }' > taskdef.json
+      - echo $SERVICE_NAME
+      - echo $TASKDEF_ROLE_ARN
+      - echo $EXECUTION_ROLE_ARN
+      - echo $TASKDEF
+      - echo $CPU
+      - echo $MEMORY
+      - echo $REQUIRES_COMPATIBILITIES
+      - echo $NETWORK_MODE
+#      - echo '{"family": "'${SERVICE_NAME}'", "taskRoleArn": "'${TASKDEF_ROLE_ARN}'", "executionRoleArn": "'${EXECUTION_ROLE_ARN}'", "containerDefinitions": '$TASKDEF', "cpu": "'$CPU'", "memory": "'$MEMORY'", "requiresCompatibilities": [ '$REQUIRES_COMPATIBILITIES' ], "networkMode": "'${NETWORK_MODE}'" }' > taskdef.json
 artifacts:
   files:
     - 'appspec.yaml'
