@@ -10,7 +10,7 @@ app.get('/', (request, response) => {
     const containerName = os.hostname();
     console.log('hello root')
     response.json({
-        service: "Duongdx - PROD edit 2023/12/15 10:15",
+        service: "Duongdx - PROD - v2 edit 2023/12/15 11:15",
         contact: "xuanduong.kma@gmail.com",
         clientIp: clientIp,
         elbIp: elbIp,
