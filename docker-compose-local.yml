@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  express-app:
+    build:
+      context: ""
+      dockerfile: Dockerfile.local
+    container_name: express-app
+    image: express-app
+    volumes:
+      - ./:/app
+    networks:
+      - express_network
+    ports:
+      - "${APP_PORT}:8088"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+      - APP_PORT=${APP_PORT}
+      - APP_ENV=${APP_ENV}
+  database:
+    build:
+      context: mysql
+    image: express_db
+    container_name: express_db
+    networks:
+      - express_network
+    volumes:
+      - express_db_volume:/var/lib/mysql
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "${DB_PORT}:3306"
+networks:
+  express_network:
+    name: express_network
+volumes:
+  express_db_volume: {}
