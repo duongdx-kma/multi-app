@@ -3,16 +3,18 @@ version: "3.8"
 services:
   express-app:
     build:
-      context: ""
+      context: express-app
       dockerfile: Dockerfile.local
     container_name: express-app
     image: express-app
     volumes:
-      - ./:/app
+      - ./express-app:/app
     networks:
       - express_network
     ports:
       - "${APP_PORT}:8088"
+    depends_on:
+      - database
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
@@ -37,6 +39,17 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     ports:
       - "${DB_PORT}:3306"
+#  react-app:
+#    build:
+#      context: react-app
+#    image: react-app
+#    container_name: react-app
+#    networks:
+#      - express_network
+#    volumes:
+#      - ./react-app:/app
+#    ports:
+#      - "${REACT_APP}:3000"
 networks:
   express_network:
     name: express_network

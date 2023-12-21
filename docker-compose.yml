@@ -1,9 +1,10 @@
 version: "3.8"
-# https://intellipaat.com/community/67761/mounting-efs-to-aws-fargate-using-terraform-platformtaskdefinitionincompatibilityexception-error
+
 services:
   express-app:
     build:
-      context: ""
+      context: express-app
+      dockerfile: Dockerfile
     container_name: express-app
     image: express-app
     volumes:
@@ -12,6 +13,8 @@ services:
       - express_network
     ports:
       - "${APP_PORT}:8088"
+    depends_on:
+      - database
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
@@ -25,10 +28,10 @@ services:
       context: mysql
     image: express_db
     container_name: express_db
-    volumes:
-      - express_db_volume:/var/lib/mysql
     networks:
       - express_network
+    volumes:
+      - express_db_volume:/var/lib/mysql
     environment:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -36,20 +39,19 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     ports:
       - "${DB_PORT}:3306"
-  react-app:
-    build:
-      context: react-app
-    image: react-app
-    container_name: react-app
-    networks:
-      - express_network
-    volumes:
-      - ./react-app:/app
-    ports:
-      - "${REACT_APP}:3000"
+#  react-app:
+#    build:
+#      context: react-app
+#    image: react-app
+#    container_name: react-app
+#    networks:
+#      - express_network
+#    volumes:
+#      - ./react-app:/app
+#    ports:
+#      - "${REACT_APP}:3000"
 networks:
   express_network:
     name: express_network
 volumes:
-  # need nfs
   express_db_volume: {}

@@ -10,7 +10,7 @@ COPY .. ./
 
 RUN ls -ll
 
-RUN chmod 755 docker/express-app/entrypoint.sh
+RUN chmod 755 docker/entrypoint.sh
 
 EXPOSE 8088
 
