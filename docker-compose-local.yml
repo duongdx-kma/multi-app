@@ -38,18 +38,22 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     ports:
-      - "${DB_PORT}:3306"
-#  react-app:
-#    build:
-#      context: react-app
-#    image: react-app
-#    container_name: react-app
-#    networks:
-#      - express_network
-#    volumes:
-#      - ./react-app:/app
-#    ports:
-#      - "${REACT_APP}:3000"
+      - "3307:3306"
+  react-app:
+    build:
+      context: react-app
+      dockerfile: Dockerfile.local
+    image: react-app-dev
+    container_name: react-app
+    environment:
+      - PROXY=true
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
+    networks:
+      - express_network
+    volumes:
+      - ./react-app/src:/app/src
+    ports:
+      - "${REACT_PORT}:3000"
 networks:
   express_network:
     name: express_network
