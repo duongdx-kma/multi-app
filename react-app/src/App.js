@@ -2,19 +2,16 @@ import React, {useCallback} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosClient from "./api/axios-client";
 
 function App() {
   const[users, setUsers] = useState([]);
 
     const fetchPost = async () => {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept-Language': 'fr',
-            // 'Authorization': `Bearer ${accessToken}`,
-        }
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/users`, {headers});
+            console.log(2222);
+
+            const response = await axiosClient.get(`${process.env.REACT_APP_API_URL}/users`);
             setUsers(response?.data?.data)
         } catch (err) {
             console.error(err);
@@ -53,7 +50,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          duongdx - updated 2023/10/15
+          duongdxxxxsssss1s - frontend - updated 2023/10/15
         </a>
       </header>
     </div>

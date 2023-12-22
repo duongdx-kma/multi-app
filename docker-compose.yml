@@ -6,9 +6,7 @@ services:
       context: express-app
       dockerfile: Dockerfile
     container_name: express-app
-    image: express-app
-    volumes:
-      - ./express-app:/app
+    image: express-app-prod
     networks:
       - express_network
     ports:
@@ -26,7 +24,7 @@ services:
   database:
     build:
       context: mysql
-    image: express_db
+    image: express-db-prod
     container_name: express_db
     networks:
       - express_network
@@ -39,17 +37,20 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
     ports:
       - "${DB_PORT}:3306"
-#  react-app:
-#    build:
-#      context: react-app
-#    image: react-app
-#    container_name: react-app
-#    networks:
-#      - express_network
-#    volumes:
-#      - ./react-app:/app
-#    ports:
-#      - "${REACT_APP}:3000"
+  react-app:
+    build:
+      context: react-app
+      dockerfile: Dockerfile
+    image: react-app-prod
+    container_name: react-app
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
+    networks:
+      - express_network
+    volumes:
+      - ./react-app:/app
+    ports:
+      - "${REACT_PORT}:80"
 networks:
   express_network:
     name: express_network
