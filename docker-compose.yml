@@ -20,7 +20,8 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_PORT=${DB_PORT}
       - APP_PORT=${APP_PORT}
-      - APP_ENV=${APP_ENV}
+      - AWS_REGION=${AWS_REGION}
+      - APP_ENV=${SECRET_MANAGER_NAME}
   database:
     build:
       context: mysql
