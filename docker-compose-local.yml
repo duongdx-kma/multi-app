@@ -23,6 +23,10 @@ services:
       - DB_PORT=${DB_PORT}
       - APP_PORT=${APP_PORT}
       - APP_ENV=${APP_ENV}
+      - AWS_REGION=${AWS_REGION}
+      - SECRET_MANAGER_NAME=${SECRET_MANAGER_NAME}
+      - AWS_ACCESSKEYID=${AWS_ACCESSKEYID}
+      - AWS_SECRETKEY=${AWS_SECRETKEY}
   database:
     build:
       context: mysql
