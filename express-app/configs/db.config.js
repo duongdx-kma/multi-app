@@ -6,7 +6,7 @@ const db = {
     password: env.DB_PASSWORD,
     database: env.DB_NAME,
     port: env.DB_PORT || 3306,
-    // ssl: true
+    ssl: env.APP_ENV == "prod" ? true : undefined
 };
 
 module.exports = db;
