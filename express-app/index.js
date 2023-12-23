@@ -32,7 +32,6 @@ app.get('/', (request, response) => {
     })
 })
 
-
 //https://db-migrate.readthedocs.io/en/latest/Getting%20Started/configuration/
 //https://github.com/dkvasani/express-mysql-migration-app/blob/master/migrations/20181207105559-user.js
 app.use('/users', users);
