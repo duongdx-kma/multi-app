@@ -7,6 +7,7 @@ async function query(sql, params) {
     console.log(dbInfo, 99999)
     if (dbConfig.ssl) {
         dbConfig.password = dbInfo.password
+        dbConfig.user = dbInfo.user_name
     }
     console.log(dbConfig, sql, params)
     const connection = await mysql.createConnection(dbConfig);
