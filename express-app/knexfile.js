@@ -1,5 +1,9 @@
 // Update with your config settings.
 const getSecret = require("./services/secret-manager-service")
+const dotenv = require('dotenv');
+const path = require('path')
+
+dotenv.config({ path: path.resolve(__dirname, './.env') })
 const env = process.env
 const returnSequelizeConfig = async () => {
   const dbInfo = await getSecret.getSecret("Knex - migrate or seed");

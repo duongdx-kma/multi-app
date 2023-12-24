@@ -23,12 +23,3 @@ if [ ! -f ".env" ]; then
 else
     echo "env file exists."
 fi
-
-# migrate database
-npm run knex migrate:latest
-
-# database seed
-npm run knex seed:run
-
-# start
-npm run start:dev

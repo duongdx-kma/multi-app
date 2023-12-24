@@ -1,11 +1,15 @@
 const {SecretsManagerClient, GetSecretValueCommand} = require("@aws-sdk/client-secrets-manager")
 const NodeCache = require( "node-cache" );
 const myCache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+const dotenv = require('dotenv');
+const path = require('path')
 
+dotenv.config({ path: path.resolve(__dirname, './.env') })
 const key = {
     accessKeyId: process.env.AWS_ACCESSKEYID,
     secretAccessKey: process.env.AWS_SECRETKEY
 }
+
 const getSecret = async (origin = '') => {
     const value = myCache.get( "myKey" );
 
