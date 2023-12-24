@@ -4,15 +4,15 @@ services:
   express-app:
     build:
       context: express-app
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     container_name: express-app
-    image: express-app-prod
+    image: express-app
+    volumes:
+      - ./express-app:/app
     networks:
       - express_network
     ports:
       - "${APP_PORT}:8088"
-    depends_on:
-      - database
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
@@ -20,39 +20,27 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_PORT=${DB_PORT}
       - APP_PORT=${APP_PORT}
+      - APP_ENV=${APP_ENV}
       - AWS_REGION=${AWS_REGION}
-      - APP_ENV=${SECRET_MANAGER_NAME}
+      - SECRET_MANAGER_NAME=${SECRET_MANAGER_NAME}
+      - AWS_ACCESSKEYID=${AWS_ACCESSKEYID}
+      - AWS_SECRETKEY=${AWS_SECRETKEY}
       - LOCAL_TEST_SECRET_MANAGER=${LOCAL_TEST_SECRET_MANAGER}
-  database:
-    build:
-      context: mysql
-    image: express-db-prod
-    container_name: express_db
-    networks:
-      - express_network
-    volumes:
-      - express_db_volume:/var/lib/mysql
-    environment:
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-    ports:
-      - "${DB_PORT}:3306"
   react-app:
     build:
       context: react-app
-      dockerfile: Dockerfile
-    image: react-app-prod
+      dockerfile: Dockerfile.local
+    image: react-app-dev
     container_name: react-app
     environment:
+      - PROXY=true
       - REACT_APP_API_URL=${REACT_APP_API_URL}
     networks:
       - express_network
     volumes:
-      - ./react-app:/app
+      - ./react-app/src:/app/src
     ports:
-      - "${REACT_PORT}:80"
+      - "${REACT_PORT}:3000"
 networks:
   express_network:
     name: express_network
