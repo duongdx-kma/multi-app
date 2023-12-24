@@ -31,9 +31,8 @@ app.get('/', (request, response) => {
         message: `hello world from Ha Noi, the VietNam's capital`
     })
 })
-
-//https://db-migrate.readthedocs.io/en/latest/Getting%20Started/configuration/
-//https://github.com/dkvasani/express-mysql-migration-app/blob/master/migrations/20181207105559-user.js
+// https://gist.github.com/NigelEarle/70db130cc040cc2868555b29a0278261
+// https://blog.openreplay.com/creating-a-nodejs-api-with-knex-and-mysql/
 app.use('/users', users);
 
 /* Error handler middleware */

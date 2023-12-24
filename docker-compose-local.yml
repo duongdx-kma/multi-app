@@ -27,6 +27,7 @@ services:
       - SECRET_MANAGER_NAME=${SECRET_MANAGER_NAME}
       - AWS_ACCESSKEYID=${AWS_ACCESSKEYID}
       - AWS_SECRETKEY=${AWS_SECRETKEY}
+      - LOCAL_TEST_SECRET_MANAGER=${LOCAL_TEST_SECRET_MANAGER}
   database:
     build:
       context: mysql

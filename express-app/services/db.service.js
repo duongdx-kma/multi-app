@@ -5,6 +5,9 @@ const getSecret = require("./secret-manager-service")
 async function query(sql, params) {
     const dbInfo = await getSecret.getSecret();
     console.log(dbInfo, 99999)
+    if (dbConfig.ssl) {
+        dbConfig.password = dbInfo.password
+    }
     console.log(dbConfig, sql, params)
     const connection = await mysql.createConnection(dbConfig);
     const [results, ] = await connection.query(sql, params);

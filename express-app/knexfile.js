@@ -2,15 +2,16 @@
 const getSecret = require("./services/secret-manager-service")
 const env = process.env
 const returnSequelizeConfig = async () => {
-  const dbInfo = await getSecret.getSecret();
+  const dbInfo = await getSecret.getSecret("Knex - migrate or seed");
+  const isProd = process.env.APP_ENV == "production";
 
   return {
-    development: {
+    "development": {
       client: "mysql2",
       connection: {
         host: env.DB_HOST,
-        user: env.DB_USER,
-        password: env.DB_PASSWORD,
+        user: isProd ? dbInfo.user_name : env.DB_USER,
+        password: isProd ? dbInfo.password : env.DB_PASSWORD,
         database: env.DB_NAME,
       },
       seed: {
@@ -20,22 +21,6 @@ const returnSequelizeConfig = async () => {
         directory:  __dirname + "/migrations",
       }
     },
-
-    production: {
-      client: "mysql2",
-      connection: {
-        host: env.DB_HOST,
-        user: env.DB_USER,
-        password: dbInfo.password,
-        database: env.DB_NAME,
-      },
-      seed: {
-        directory: __dirname + "/db/migrations",
-      },
-      migrations: {
-        directory:  __dirname + "/migrations",
-      }
-    }
   }
 }
 
