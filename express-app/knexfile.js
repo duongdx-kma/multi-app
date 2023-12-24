@@ -14,7 +14,7 @@ const returnSequelizeConfig = async () => {
       client: "mysql2",
       connection: {
         host: env.DB_HOST,
-        user: isProd ? dbInfo.user_name : env.DB_USER,
+        user: isProd ? dbInfo.username : env.DB_USER,
         password: isProd ? dbInfo.password : env.DB_PASSWORD,
         database: env.DB_NAME,
       },

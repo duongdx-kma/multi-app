@@ -15,4 +15,7 @@ const db = {
     } : undefined
 };
 
+console.log(db, "db.config.json -11111111")
+console.log(env.APP_ENV, "db.config.json -11111111")
+
 module.exports = db;

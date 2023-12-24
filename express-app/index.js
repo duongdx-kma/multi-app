@@ -24,7 +24,7 @@ app.get('/', (request, response) => {
     const containerName = os.hostname();
     console.log('hello root')
     response.json({
-        service: "Duongdx - dd - 111 edit 2023/12/15 13:45",
+        service: "Duongdx - dev - 111 edit 2023/12/24 17:01",
         contact: "xuanduong.kma@gmail.com",
         clientIp: clientIp,
         elbIp: elbIp,

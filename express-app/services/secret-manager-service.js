@@ -41,7 +41,7 @@ const getKey = async (origin = '') => {
           })
         );
         console.log(origin, "GET DATA FROM SECRET MANAGER - SUCCESSSSSSSSS")
-
+        console.log(typeof  response.SecretString, response.SecretString, "type of  response.SecretString")
         return JSON.parse(response.SecretString)
     } catch (error) {
         // For a list of exceptions thrown, see
